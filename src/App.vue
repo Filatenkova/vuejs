@@ -1,26 +1,37 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<template xmlns="http://www.w3.org/1999/html">
+  <section>
+    <div>
+      <input
+          type="text"
+          name="wallet"
+          placeholder="Например DOGE"
+      />
+    </div>
+    <button
+        type="button"
+    >Добавить
+    </button>
+  </section>
+  <section>
+    <ul>
+      <li>
+        <span>Название валюты</span>
+        <span>: </span>
+        <span>Цена</span>
+        &nbsp
+        <button
+         type="button"
+        >
+          Удалить
+        </button>
+      </li>
+    </ul>
+  </section>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
