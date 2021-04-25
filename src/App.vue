@@ -1,14 +1,27 @@
-<template>
+<template class="app">
   <section>
-    <div>
+    <div class="app__margin-5">
       <input
-          v-model='ticker'
+          v-model.trim='ticker'
           @keydown.enter='add'
           type='text'
           name='wallet'
           placeholder='Например DOGE'
       />
     </div>
+    <template v-if='tickers.length'>
+      <div class="app__margin-10">
+        <span
+            v-for='t in tickers'
+            :key='t.name'
+            @click="enterToInput(t.name)"
+            class="app__prompt"
+        >
+        {{ t.name }}
+      </span>
+      </div>
+      <div v-if="error">Такой тикер уже добавлен</div>
+    </template>
     <button
         @click='add'
         type='button'
@@ -49,13 +62,29 @@ export default {
 
   data() {
     return {
-      ticker: 'default',
+      ticker: '',
       tickers: [],
       sel: null,
+      error: false,
+    }
+  },
+
+  created() {
+    const tickersData = localStorage.getItem("cryptonomicon-list");
+
+    if (tickersData) {
+      this.tickers = JSON.parse(tickersData);
+      this.tickers.forEach(ticker => {
+        this.subscribeToUpdates();
+      });
     }
   },
 
   methods: {
+    subscribeToUpdates() {
+      this.ticker = '';
+    },
+
     add() {
       const currentTicker = {
         name: this.ticker,
@@ -63,7 +92,9 @@ export default {
       }
 
       this.tickers.push(currentTicker);
-      this.ticker = '';
+
+      localStorage.setItem("cryptonomicon-list", JSON.stringify(this.tickers));
+      this.subscribeToUpdates();
     },
 
     select(ticker) {
@@ -72,7 +103,12 @@ export default {
 
     handleDelete(tickerToRemove) {
       this.tickers = this.tickers.filter(t => t !== tickerToRemove);
+    },
+
+    enterToInput(value) {
+      this.ticker = value;
     }
   }
 }
 </script>
+<style src="./assets/app.css"></style>

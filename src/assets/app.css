@@ -1,0 +1,21 @@
+.app__margin-5 {
+    margin-bottom: 5px;
+}
+
+.app__margin-10 {
+    margin-bottom: 10px;
+}
+
+.app__prompt {
+    display: inline-block;
+    background: lightgrey;
+    color: white;
+    font-size: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 2px;
+    margin-right: 5px;
+    width: 30px;
+    text-align: center;
+    cursor: pointer;
+}
